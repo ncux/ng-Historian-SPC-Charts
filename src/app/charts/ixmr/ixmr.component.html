@@ -1,0 +1,20 @@
+<div class="mt-2">
+
+  <a id="" routerLink="/project" class="switcher-button my-3 btn btn-info">BACK</a>
+
+  <h3 class="text-center">SPC Chart for tag <span style="color: teal">{{ tagName }}</span></h3>
+
+  <!--<a class="switcher-button btn btn-info ml-5" routerLink="/bar-chart">BAR CHART</a> --> <br> <hr>
+
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType">
+    </canvas>
+  </div>
+
+
+</div>

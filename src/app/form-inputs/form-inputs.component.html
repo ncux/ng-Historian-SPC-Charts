@@ -1,0 +1,89 @@
+<div id="container" class="mt-4">
+
+    <div id="logoAndStuff" class="">
+        <img src="assets/images/logo.png" id="logo" class="img-fluid img-thumbnail"> <br>
+
+        <h3 class="text-center font-weight-bold mt-2">Historian Statistical Process Control Charts</h3>
+
+
+
+    </div>
+
+    <form #form="ngForm" (ngSubmit)="plot(form); form.resetForm();">
+
+        <div class="form-group p-2">
+            <label for="tag" class="input-labels">选择一个标签</label>
+            <select ngModel #tag="ngModel" id="tag" name="tag" size="5" required class="form-control p-1 mb-4">
+                <option *ngFor="let tagOption of tagsListArray">{{ tagOption }}</option>
+            </select>
+            <div *ngIf="tag.touched && tag.invalid" class="alert alert-danger">
+                Select a tag
+            </div>
+        </div>
+
+        <div class="form-group p-2">
+            <label for="startDate" class="input-labels">开始日期</label>
+            <input ngModel #startDate="ngModel" name="startDate" id="startDate" type="date" required value="2018-07-22" class="form-control-sm">
+            <div *ngIf="startDate.touched && startDate.invalid" class="alert alert-danger">
+                Input a start date!
+            </div>
+
+            <label for="startTime" class="ml-5 input-labels">开始时间</label>
+            <input id="startTime" ngModel #startTime="ngModel" name="startTime" type="time" required class="form-control-sm">
+            <div *ngIf="startTime.touched && startTime.invalid" class="alert alert-danger">
+                Input a start time!
+            </div>
+
+            <label for="endDate" class="ml-5 input-labels">结束日期</label>
+            <input id="endDate" ngModel #endDate="ngModel" name="endDate" type="date" required class="form-control-sm">
+            <div *ngIf="endDate.touched && endDate.invalid" class="alert alert-danger">
+                Input an end date!
+            </div>
+
+            <label for="endTime" class="ml-5 input-labels">结束时间</label>
+            <input id="endTime" ngModel #endTime="ngModel" name="endTime" type="time" required class="form-control-sm">
+            <div *ngIf="endTime.touched && endTime.invalid" class="alert alert-danger">
+                Input an end time!
+            </div>
+        </div>
+
+        <div class="form-group mb-4 p-2">
+            <label for="calcMode" class="input-labels">计算模式</label>
+            <input id="calcMode" ngModel #calcMode="ngModel" name="calcMode" type="number" value="1" min="1" max="6" class="form-control-sm">
+            <div *ngIf="calcMode.touched && calcMode.invalid" class="alert alert-danger">
+                Input the calculation mode!
+            </div>
+
+            <label for="count" class="ml-5 input-labels">计数</label>
+            <input id="count" ngModel #count="ngModel" name="count" type="number" min="1" required class="form-control-sm">
+            <div *ngIf="count.touched && count.invalid" class="alert alert-danger">
+                The count is required!
+            </div>
+
+            <label for="interval" class="ml-5 input-labels">间隔 (秒)</label>
+            <input id="interval" ngModel #interval="ngModel" name="interval" type="number" min="1" required class="form-control-sm">
+            <div *ngIf="interval.touched && interval.invalid" class="alert alert-danger">
+                Input the interval!
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block mt-3 mb-4">PLOT</button>
+
+    </form>
+
+</div>
+
+<div id="nav-container" style="display: none">
+    <ul id="charts-links" class="">
+        <li class="">
+            <a class=" btn btn-info" routerLink="/ixmr">IXMR</a>
+        </li>
+        <!--<li class="">-->
+            <!--<a class=" btn btn-info ml-5" routerLink="/xbar-r">Xbar-R</a>-->
+        <!--</li>-->
+        <!--<li class="">-->
+            <!--<a class=" btn btn-info ml-5" routerLink="/xbar-s">Xbar-S</a>-->
+        <!--</li>-->
+    </ul>
+</div>
+
