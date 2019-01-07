@@ -10,7 +10,6 @@ export class QueryUrlBuilderService {
   private dataUrl = environment.dataUrl;
 
   tagName = '';
-  tagsListStringValues = [];
   startDateValue;
   startTimeValue;
   endDateValue;
@@ -19,15 +18,15 @@ export class QueryUrlBuilderService {
   countValue;
   intervalValue;
 
-  constructor(private chartData: ChartDataService) { }
+  constructor(private chartDataService: ChartDataService) { }
 
   buildQueryUrl() {
     // change interval value to milliseconds
     const milliseconds = Math.ceil((parseInt(this.intervalValue)) * 1000);
-    this.chartData.dataQueryUrl = `${this.dataUrl}/${this.tagName}/${this.startDateValue}T${this.startTimeValue}/${this.endDateValue}T${this.endTimeValue}/${this.calcModeValue}/${this.countValue}/${milliseconds}`;
+    this.chartDataService.dataQueryUrl = `${this.dataUrl}/${this.tagName}/${this.startDateValue}T${this.startTimeValue}/${this.endDateValue}T${this.endTimeValue}/${this.calcModeValue}/${this.countValue}/${milliseconds}`;
     // console.log(this.chartData.dataQueryUrl);
-    this.chartData.tagName = this.tagName;
-    this.chartData.getDataAndSetChartValues();
+    this.chartDataService.tagName = this.tagName;
+    this.chartDataService.getDataAndSetChartValues();
   }
 
 

@@ -12,7 +12,7 @@ export class FormInputsComponent implements OnInit {
 
   tagsListArray: any[] = [];
 
-  constructor(private tagsGetter: TagsService, private queryUrlService: QueryUrlBuilderService) { }
+  constructor(private tagsGetterService: TagsService, private queryUrlService: QueryUrlBuilderService) { }
 
   ngOnInit() {
     this.getTags();
@@ -20,8 +20,8 @@ export class FormInputsComponent implements OnInit {
 
 
   getTags() {
-    this.tagsGetter.getAllTags();
-    this.tagsListArray = this.tagsGetter.tagsArray;
+    this.tagsGetterService.getAllTags();
+    this.tagsListArray = this.tagsGetterService.tagsArray;
   }
 
 
