@@ -24,7 +24,6 @@ export class ChartDataService {
   ChartDataObjectsArray = [];   // holds values for ChartData
 
   // Statistical Process Control parameters
-  testingNumbers = [6, 3, 2, 1];  //  SD = 1.87;   used for testing the standard deviation function
   mean;
   MeanArray = [];
   standardDevivation;
@@ -49,39 +48,27 @@ export class ChartDataService {
         this.ChartLabels.push(this.simplifyTime(value.TimeStamp));
         // console.log(this.ChartLabels);
         this.stringValuesArray.push((parseInt(value.Value)).toFixed(0));
-        // console.log(typeof this.stringValuesArray[0]);
         this.numberValuesArray = this.stringValuesArray.map(item => parseInt(item));   // array of strings converted to array of numbers
-        // console.log(this.numberValuesArray);
         this.TagDataObject['data'] = this.numberValuesArray;
         this.TagDataObject['label'] = this.tagName;
         this.ChartDataObjectsArray.push(this.TagDataObject);   // TagDataObject is a SPC parameter; plot it
 
         // computing SPC parameters
         this.mean = this.meanCalculator(this.numberValuesArray);
-        // console.log(this.mean);     //  85312.7
         this.MeanArray = [...this.numberValuesArray];  // trick to correctly fill it with the mean
         this.MeanArray.fill(this.mean);
-        // console.log(this.MeanArray);
         this.MeanDataObject['data'] = this.MeanArray;
         this.MeanDataObject['label'] = 'mean';
         this.ChartDataObjectsArray.push(this.MeanDataObject);  // MeanDataObject is a SPC parameter; plot it
-        // console.log(this.standardDeviationCalculator(this.testingNumbers));  // 1.87
         this.standardDevivation = this.standardDeviationCalculator(this.numberValuesArray);
-        // console.log(this.standardDevivation);  //  9842.301174522145
 
         this.UCL = this.mean + 3 * this.standardDevivation;
         this.LCL = this.mean - 3 * this.standardDevivation;
-
-        // console.log(this.UCL);    // 114839.60352356643
-        // console.log(this.LCL);   // 55785.79647643356
         this.UCLarray = [...this.numberValuesArray];
         this.UCLarray.fill(this.UCL);
 
         this.LCLarray = [...this.numberValuesArray];
         this.LCLarray.fill(this.LCL);
-
-        // console.log(this.UCLarray);
-        // console.log(this.LCLarray);
 
         this.UCLDataObject['data'] = this.UCLarray;
         this.UCLDataObject['label'] = 'UCL';
@@ -96,15 +83,9 @@ export class ChartDataService {
 
       });
 
-
-
-
-
-
     });
 
   }
-
 
   simplifyTime = timestamp => timestamp.slice(0, 16);  // trims off the seconds and milliseconds
 
@@ -120,13 +101,6 @@ export class ChartDataService {
     const meanSquareDifference = this.meanCalculator(squareDifferences);
     return Math.sqrt(meanSquareDifference);  // standard deviation
   }
-
-
-
-
-
-
-
 
 
 }
